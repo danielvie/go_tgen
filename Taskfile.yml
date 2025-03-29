@@ -1,0 +1,21 @@
+version: '3'
+
+tasks:
+  default:
+    deps: ["build"]
+
+  build:
+    aliases: ["b"]
+    cmds:
+      - go build
+
+  install:
+    deps: ["build"]
+    aliases: ["i"]
+    cmds:
+      - cp tgen.exe C:/SANDBOX/APP/bin
+
+  test:
+    aliases: ["t"]
+    cmds:
+      - go test ./testing
