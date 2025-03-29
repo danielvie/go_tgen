@@ -6,6 +6,9 @@ on:
     tags:
       - 'v*'  # Triggers on tags like v1.0.0, v2.0.0, etc.
 
+permissions:
+  contents: write  # Grant write access to repository contents
+
 jobs:
   build:
     runs-on: ubuntu-latest
