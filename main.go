@@ -6,6 +6,8 @@ import (
 	"os"
 
 	"tgen/gen"
+
+	_ "golang.org/x/mod/modfile"
 )
 
 func main() {
