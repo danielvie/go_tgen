@@ -34,7 +34,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: tgen
-          path: tgen.exe
+          path: tgen-windows-amd64.exe
 
       # Step 5: Create a GitHub Release
       - name: Create Release
@@ -45,4 +45,4 @@ jobs:
           name: Release ${{ github.ref_name }}
           draft: false
           prerelease: false
-          files: tgen.exe
+          files: tgen-windows-amd64.exe
