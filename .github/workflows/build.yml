@@ -1,10 +1,10 @@
-name: Build Go Executable
+name: Build and Release Windows Executable
 
-# Trigger the workflow on push to the main branch
+# Trigger the workflow only on tagged pushes
 on:
   push:
     tags:
-      - 'v*' # triggers on tags like v1.0.0, v2.0.0, etc..
+      - 'v*'  # Triggers on tags like v1.0.0, v2.0.0, etc.
 
 jobs:
   build:
@@ -30,17 +30,17 @@ jobs:
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: tgen  # Name of the artifact
-          path: tgen.exe  # Path to the generated executable
+          name: tgen
+          path: tgen.exe
 
-      # Step 5: Create a GitHub Release (only for tagged pushes)
+      # Step 5: Create a GitHub Release
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Required for authentication
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: ${{ github.ref_name }}  # e.g., v1.0.0
+          tag_name: ${{ github.ref_name }}
           release_name: Release ${{ github.ref_name }}
           draft: false
           prerelease: false
@@ -51,7 +51,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}  # From create_release step
-          asset_path: myapp.exe
-          asset_name: myapp-windows-amd64.exe
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: tgen.exe
+          asset_name: tgen-windows-amd64.exe
           asset_content_type: application/octet-stream
