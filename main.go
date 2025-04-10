@@ -33,7 +33,7 @@ examples:
 			*option = os.Args[1] // Get the first argument after the program name
 		}
 	}
-
+	// bla ble
 	switch *option {
 	case "python", "py":
 		gen.GenPython()
