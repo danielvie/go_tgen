@@ -59,11 +59,19 @@ func GenPython() error {
 }
 
 func GenCpp() error {
-	if err := GenFile("./src/main.cpp", "templates/cpp/main.cpp"); err != nil {
+	if err := GenFile("./src/main.cpp", "templates/cpp/src/main.cpp"); err != nil {
 		fmt.Println(err)
 	}
 
 	if err := GenFile("./CMakeLists.txt", "templates/cpp/CMakeLists.txt"); err != nil {
+		fmt.Println(err)
+	}
+
+	if err := GenFile("./lib/mathlib.cpp", "templates/cpp/lib/mathlib.cpp"); err != nil {
+		fmt.Println(err)
+	}
+
+	if err := GenFile("./include/mathlib.h", "templates/cpp/include/mathlib.h"); err != nil {
 		fmt.Println(err)
 	}
 

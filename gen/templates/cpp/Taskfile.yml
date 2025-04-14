@@ -14,3 +14,8 @@ tasks:
     deps: ["build"]
     cmds:
       - ./build/debug/main.exe
+      
+  clean:
+    aliases: ["c"]
+    cmds: 
+      - rm -rf build
