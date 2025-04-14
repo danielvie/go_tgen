@@ -63,15 +63,15 @@ func GenCpp() error {
 		fmt.Println(err)
 	}
 
-	if err := GenFile("./CMakeLists.txt", "templates/cpp/CMakeLists.txt"); err != nil {
-		fmt.Println(err)
-	}
-
 	if err := GenFile("./lib/mathlib.cpp", "templates/cpp/lib/mathlib.cpp"); err != nil {
 		fmt.Println(err)
 	}
 
 	if err := GenFile("./include/mathlib.h", "templates/cpp/include/mathlib.h"); err != nil {
+		fmt.Println(err)
+	}
+
+	if err := GenCMake(); err != nil {
 		fmt.Println(err)
 	}
 
