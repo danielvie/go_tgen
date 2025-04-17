@@ -13,7 +13,9 @@ tasks:
     deps: ["build"]
     aliases: ["i"]
     cmds:
-      - cp tgen.exe C:/SANDBOX/APP/bin
+      - 'if {{ eq OS "windows" }}; 
+        then powershell cp tgen.exe C:/SANDBOX/APP/bin;
+        else cp tgen.exe C:/SANDBOX/APP/bin; fi'
 
   test:
     aliases: ["t"]

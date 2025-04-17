@@ -18,4 +18,6 @@ tasks:
   clean:
     aliases: ["c"]
     cmds: 
-      - rm -rf build
+      - 'if {{"{{"}} eq OS "windows" {{"}}"}}; 
+        then powershell Remove-Item -Recurse -Force build; 
+        else rm -rf build; fi'
