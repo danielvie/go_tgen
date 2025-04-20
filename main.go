@@ -45,6 +45,8 @@ examples:
 		gen.GenCMake()
 	case "cpptask":
 		gen.GenCppTask()
+	case "go":
+		gen.GenGolang()
 	default:
 		fmt.Println("name not known!")
 		flag.Usage()

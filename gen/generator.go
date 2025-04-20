@@ -113,3 +113,15 @@ func GenCppTask() error {
 
 	return nil
 }
+
+func GenGolang() error {
+	if err := GenFile("./Taskfile.yml", "templates/go/Taskfile.yml"); err != nil {
+		fmt.Println(err)
+	}
+
+	if err := GenFile("./main.go", "templates/go/main.go"); err != nil {
+		fmt.Println(err)
+	}
+
+	return nil
+}
