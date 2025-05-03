@@ -4,7 +4,7 @@
 typedef int (*MathFunc)(int, int);
 
 int main() {
-    HMODULE hDll = LoadLibrary("build/Debug/mathlib.dll");
+    HMODULE hDll = LoadLibraryW(L"build/Debug/mathlib.dll");
     if (!hDll) {
         std::cerr << "Failed to load DLL!" << std::endl;
         return 1;

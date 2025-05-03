@@ -10,5 +10,6 @@ tasks:
       - zig build
 
   main:
+    deps: ["build"]
     cmds:
       - zig build run

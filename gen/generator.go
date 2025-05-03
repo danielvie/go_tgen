@@ -15,6 +15,28 @@ import (
 //go:embed templates/python/.python-version
 var templates embed.FS
 
+func GetFilesInPath(templates embed.FS, root string) []string {
+	paths := make([]string, 0)
+
+	err := fs.WalkDir(templates, root, func(path string, d fs.DirEntry, err error) error {
+		if err != nil {
+			fmt.Printf("prevent panic by handling failure accessing a path %q: %v\n", path, err)
+			return err
+		}
+		if !d.IsDir() {
+			paths = append(paths, path)
+		}
+		return nil
+	})
+
+	if err != nil {
+		fmt.Printf("error walking the path:  %v", err)
+		os.Exit(1)
+	}
+
+	return paths
+}
+
 func GenFile(filename, templatePath string) error {
 	// ensure the directory exists
 	filePath := filepath.Dir(filename)
@@ -61,44 +83,19 @@ func GenPython() error {
 }
 
 func GenCpp() error {
-	if err := GenFile("./src/main.cpp", "templates/cpp/src/main.cpp"); err != nil {
-		fmt.Println(err)
-	}
-
-	if err := GenFile("./lib/mathlib.cpp", "templates/cpp/lib/mathlib.cpp"); err != nil {
-		fmt.Println(err)
-	}
-
-	if err := GenFile("./include/mathlib.h", "templates/cpp/include/mathlib.h"); err != nil {
-		fmt.Println(err)
-	}
-
-	if err := GenCMake(); err != nil {
-		fmt.Println(err)
-	}
-
-	if err := GenCppTask(); err != nil {
-		fmt.Println(err)
+	err := GenWalkPath("templates/cpp")
+	if err != nil {
+		return fmt.Errorf("error walking template: %v", err)
 	}
 
 	return nil
 }
 
 func GenCppZig() error {
-	if err := GenFile("./src/main.cpp", "templates/cppzig/main.cpp"); err != nil {
-		fmt.Println(err)
-	}
 
-	if err := GenFile("./build.zig", "templates/cppzig/build.zig"); err != nil {
-		fmt.Println(err)
-	}
-
-	if err := GenFile("./Taskfile.yml", "templates/cppzig/Taskfile.yml"); err != nil {
-		fmt.Println(err)
-	}
-
-	if err := GenFile("./.gitignore", "templates/cppzig/gitignore"); err != nil {
-		fmt.Println(err)
+	err := GenWalkPath("templates/cppzig")
+	if err != nil {
+		return fmt.Errorf("error walking template: %v", err)
 	}
 
 	return nil
@@ -130,28 +127,6 @@ func GenGolang() error {
 	}
 
 	return nil
-}
-
-func GetFilesInPath(templates embed.FS, root string) []string {
-	paths := make([]string, 0)
-
-	err := fs.WalkDir(templates, root, func(path string, d fs.DirEntry, err error) error {
-		if err != nil {
-			fmt.Printf("prevent panic by handling failure accessing a path %q: %v\n", path, err)
-			return err
-		}
-		if !d.IsDir() {
-			paths = append(paths, path)
-		}
-		return nil
-	})
-
-	if err != nil {
-		fmt.Printf("error walking the path:  %v", err)
-		os.Exit(1)
-	}
-
-	return paths
 }
 
 func GenWalkPath(root string) error {
