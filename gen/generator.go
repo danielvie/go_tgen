@@ -4,8 +4,10 @@ package gen
 import (
 	"embed"
 	"fmt"
+	"io/fs"
 	"os"
 	"path/filepath"
+	"strings"
 	"text/template"
 )
 
@@ -95,6 +97,10 @@ func GenCppZig() error {
 		fmt.Println(err)
 	}
 
+	if err := GenFile("./.gitignore", "templates/cppzig/gitignore"); err != nil {
+		fmt.Println(err)
+	}
+
 	return nil
 }
 
@@ -121,6 +127,74 @@ func GenGolang() error {
 
 	if err := GenFile("./main.go", "templates/go/main.go"); err != nil {
 		fmt.Println(err)
+	}
+
+	return nil
+}
+
+func GetFilesInPath(templates embed.FS, root string) []string {
+	paths := make([]string, 0)
+
+	err := fs.WalkDir(templates, root, func(path string, d fs.DirEntry, err error) error {
+		if err != nil {
+			fmt.Printf("prevent panic by handling failure accessing a path %q: %v\n", path, err)
+			return err
+		}
+		if !d.IsDir() {
+			paths = append(paths, path)
+		}
+		return nil
+	})
+
+	if err != nil {
+		fmt.Printf("error walking the path:  %v", err)
+		os.Exit(1)
+	}
+
+	return paths
+}
+
+func GenWalkPath(root string) error {
+	// Walk through the embedded templates
+	err := fs.WalkDir(templates, root, func(path string, d fs.DirEntry, err error) error {
+		if err != nil {
+			return err
+		}
+
+		// Skip directories
+		if d.IsDir() {
+			return nil
+		}
+
+		// Create destination path by removing the templates/react_ts prefix
+		destPath := strings.TrimPrefix(path, root)
+		destPath = "./" + destPath
+
+		fmt.Printf("Generating: %s -> %s\n", path, destPath)
+
+		if err := GenFile(destPath, path); err != nil {
+			fmt.Printf("Error generating %s: %v\n", destPath, err)
+			return err
+		}
+
+		return nil
+	})
+
+	return err
+}
+
+func GenReact() error {
+
+	// create all files from template
+	err := GenWalkPath("templates/react_ts")
+	if err != nil {
+		return fmt.Errorf("error walking templates: %v", err)
+	}
+
+	// create `public` folder
+	err = os.Mkdir("public", 0755)
+	if err != nil {
+		return fmt.Errorf("error creating directory: %v", err)
 	}
 
 	return nil

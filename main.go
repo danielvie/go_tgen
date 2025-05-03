@@ -12,28 +12,29 @@ import (
 
 func main() {
 	option := flag.String("option", "",
-		`an option to generate, 
+		`
+add an $option to generate the files. 
 examples:
-	tgen python -> template of python
-	tgen cpp -> template of cpp
-	tgen cppz -> template of cpp with zig build
-	tgen cmake -> template of cmake
-	tgen cpptask -> template of cpptask
-	tgen go -> template of golang
+    >> tgen python 
+       (template of python)
+    >> tgen cpp 
+       (template of cpp)
+    >> tgen cppz 
+       (template of cpp with zig build)
+    >> tgen cmake 
+       (template of cmake)
+    >> tgen cpptask 
+       (template of cpptask)
+    >> tgen go 
+       (template of golang)
+    >> tgen react 
+       (template of react app with vite)
 `)
 
 	flag.Parse()
 
-	// Check if the option is provided via the flag
-	if *option == "" {
-		if len(os.Args) < 2 {
-			fmt.Println("Error: options not provided")
-			flag.Usage()
-		} else {
-			*option = os.Args[1] // Get the first argument after the program name
-		}
-	}
-	// bla ble
+	*option = os.Args[1]
+
 	switch *option {
 	case "python", "py":
 		gen.GenPython()
@@ -47,6 +48,8 @@ examples:
 		gen.GenCppTask()
 	case "go":
 		gen.GenGolang()
+	case "react":
+		gen.GenReact()
 	default:
 		fmt.Println("name not known!")
 		flag.Usage()
