@@ -14,12 +14,12 @@ func main() {
 	option := flag.String("option", "",
 		`an option to generate, 
 examples:
-	tgen python
-	tgen cpp
-	tgen cppzig
-	tgen cmake
-	tgen cpptask
-	tgen go
+	tgen python -> template of python
+	tgen cpp -> template of cpp
+	tgen cppz -> template of cpp with zig build
+	tgen cmake -> template of cmake
+	tgen cpptask -> template of cpptask
+	tgen go -> template of golang
 `)
 
 	flag.Parse()
@@ -39,7 +39,7 @@ examples:
 		gen.GenPython()
 	case "cpp":
 		gen.GenCpp()
-	case "cppzig":
+	case "cppz":
 		gen.GenCppZig()
 	case "cmake":
 		gen.GenCMake()
