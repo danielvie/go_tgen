@@ -41,3 +41,11 @@ import the css:
 ```css
 @import "tailwindcss";
 ```
+
+
+## troubleshoot
+if error: `Cannot find module '@babel/traverse/`
+then
+```powershell
+npm install --save-dev @babel/traverse @babel/core
+```
