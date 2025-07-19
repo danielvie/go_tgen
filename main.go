@@ -15,20 +15,20 @@ func main() {
 		`
 add an $option to generate the files. 
 examples:
-    >> tgen python 
-       (template of python)
-    >> tgen cpp 
-       (template of cpp)
-    >> tgen cppz 
-       (template of cpp with zig build)
-    >> tgen cmake 
-       (template of cmake)
-    >> tgen cpptask 
-       (template of cpptask)
-    >> tgen go 
-       (template of golang)
-    >> tgen react 
-       (template of react app with vite)
+        >> tgen python 
+             (template of python)
+        >> tgen cpp 
+             (template of cpp)
+        >> tgen cppz 
+             (template of cpp with zig build)
+        >> tgen cmake 
+             (template of cmake)
+        >> tgen cpptask 
+             (template of cpptask)
+        >> tgen go 
+             (template of golang)
+        >> tgen react 
+             (template of react app with vite)
 `)
 
 	flag.Parse()
@@ -40,6 +40,8 @@ examples:
 		gen.GenPython()
 	case "cpp":
 		gen.GenCpp()
+	case "cpplib":
+		gen.GenCppLib()
 	case "cppz":
 		gen.GenCppZig()
 	case "cmake":

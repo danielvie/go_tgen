@@ -51,7 +51,7 @@ func TestGenPython(t *testing.T) {
 
 // TestGenCpp tests the GenCpp function
 func TestGenCpp(t *testing.T) {
-	err := gen.GenCpp()
+	err := gen.GenCppLib()
 	if err != nil {
 		t.Fatalf("Failed to generate C++ files: %v", err)
 	}

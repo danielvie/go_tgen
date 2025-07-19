@@ -91,6 +91,15 @@ func GenCpp() error {
 	return nil
 }
 
+func GenCppLib() error {
+	err := GenWalkPath("templates/cpplib")
+	if err != nil {
+		return fmt.Errorf("error walking template: %v", err)
+	}
+
+	return nil
+}
+
 func GenCppZig() error {
 
 	err := GenWalkPath("templates/cppzig")
