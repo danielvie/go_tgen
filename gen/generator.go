@@ -183,3 +183,12 @@ func GenReact() error {
 
 	return nil
 }
+
+func GenTask() error {
+
+	if err := GenFile("./Taskfile.yml", "templates/task/Taskfile.yml"); err != nil {
+		fmt.Println(err)
+	}
+
+	return nil
+}

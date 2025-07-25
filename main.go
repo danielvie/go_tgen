@@ -29,6 +29,8 @@ examples:
              (template of golang)
         >> tgen react 
              (template of react app with vite)
+        >> tgen task
+             (template of Taskfile.yml)
 `)
 
 	flag.Parse()
@@ -52,6 +54,8 @@ examples:
 		gen.GenGolang()
 	case "react":
 		gen.GenReact()
+	case "task":
+		gen.GenTask()
 	default:
 		fmt.Println("name not known!")
 		flag.Usage()
