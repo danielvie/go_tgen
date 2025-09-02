@@ -56,6 +56,8 @@ examples:
 		gen.GenReact()
 	case "task":
 		gen.GenTask()
+	case "static":
+		gen.GenStaticServerBun()
 	default:
 		fmt.Println("name not known!")
 		flag.Usage()

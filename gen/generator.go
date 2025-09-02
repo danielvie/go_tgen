@@ -192,3 +192,20 @@ func GenTask() error {
 
 	return nil
 }
+
+func GenStaticServerBun() error {
+
+	// create all files from template
+	err := GenWalkPath("templates/static_server_bun")
+	if err != nil {
+		return fmt.Errorf("error walking templates: %v", err)
+	}
+
+	// create `public` folder
+	err = os.Mkdir("static", 0755)
+	if err != nil {
+		return fmt.Errorf("error creating directory: %v", err)
+	}
+
+	return nil
+}
