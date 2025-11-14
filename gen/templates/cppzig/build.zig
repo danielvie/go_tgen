@@ -7,10 +7,13 @@ pub fn build(b: *std.Build) void {
     const cppflags = [_][]const u8{ "-Wall", "-Wextra", "-std=c++20", "-O2" };
 
     // create lib
-    const lib = b.addSharedLibrary(.{
+    const lib = b.addLibrary(.{
+        .linkage = .dynamic,
         .name = "mathlib",
-        .target = target,
-        .optimize = optimize,
+        .root_module = b.createModule(.{
+            .target = target,
+            .optimize = optimize,
+        }),
     });
 
     lib.linkLibCpp();
@@ -25,8 +28,10 @@ pub fn build(b: *std.Build) void {
     // create executable
     const exe = b.addExecutable(.{
         .name = "main",
-        .target = target,
-        .optimize = optimize,
+        .root_module = b.createModule(.{
+            .target = target,
+            .optimize = optimize,
+        }),
     });
 
     exe.linkLibCpp();
