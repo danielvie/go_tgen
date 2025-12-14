@@ -13,6 +13,7 @@ import (
 
 //go:embed templates/*
 //go:embed templates/python/.python-version
+//go:embed templates/python/.gitignore
 var templates embed.FS
 
 func GetFilesInPath(templates embed.FS, root string) []string {
@@ -63,20 +64,9 @@ func GenFile(filename, templatePath string) error {
 
 func GenPython() error {
 
-	if err := GenFile("./main.py", "templates/python/main.py"); err != nil {
-		fmt.Println(err)
-	}
-
-	if err := GenFile("./.python-version", "templates/python/.python-version"); err != nil {
-		fmt.Println(err)
-	}
-
-	if err := GenFile("./pyproject.toml", "templates/python/pyproject.toml"); err != nil {
-		fmt.Println(err)
-	}
-
-	if err := GenFile("./Taskfile.yml", "templates/python/Taskfile.yml"); err != nil {
-		fmt.Println(err)
+	err := GenWalkPath("templates/python")
+	if err != nil {
+		return fmt.Errorf("error walking template: %v", err)
 	}
 
 	return nil
