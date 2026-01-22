@@ -15,19 +15,19 @@ func main() {
 		`
 add an $option to generate the files. 
 examples:
-        >> tgen python 
+        >> tgen python
              (template of python)
-        >> tgen cpp 
+        >> tgen cpp
              (template of cpp)
-        >> tgen cppz 
+        >> tgen cppz
              (template of cpp with zig build)
-        >> tgen cmake 
+        >> tgen cmake
              (template of cmake)
-        >> tgen cpptask 
+        >> tgen cpptask
              (template of cpptask)
-        >> tgen go 
+        >> tgen go
              (template of golang)
-        >> tgen react 
+        >> tgen react
              (template of react app with vite)
         >> tgen task
              (template of Taskfile.yml)
