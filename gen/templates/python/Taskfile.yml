@@ -3,14 +3,10 @@ version: '3'
 tasks:
 
   default:
-    deps: ["main"]
+    cmds:
+      - task --list-all
 
-  main:
-    aliases: ["m"]
+  run:
+    aliases: ["r"]
     cmds:
       - uv run main.py
-
-  clear:
-    aliases: ["c"]
-    cmds:
-      - 
