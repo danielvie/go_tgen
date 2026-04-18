@@ -2,7 +2,8 @@ version: '3'
 
 tasks:
   default:
-    deps: ["build"]
+    cmds:
+      - task --list-all
 
   build:
     aliases: ["b"]
