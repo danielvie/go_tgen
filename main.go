@@ -15,7 +15,9 @@ func main() {
 		`
 add an $option to generate the files. 
 examples:
-        >> tgen python
+		>> tgen agents 
+		     (template of AGENTS.md)
+        >> tgen python 
              (template of python)
         >> tgen cpp
              (template of cpp)
@@ -38,6 +40,8 @@ examples:
 	*option = os.Args[1]
 
 	switch *option {
+	case "agents":
+		gen.GenAgents()
 	case "python", "py":
 		gen.GenPython()
 	case "cpp":

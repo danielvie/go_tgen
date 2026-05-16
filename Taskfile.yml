@@ -1,24 +1,28 @@
-version: '3'
+version: "3"
 
 tasks:
   default:
+    desc: List available tasks
     cmds:
-      - task --list-all
+      - task --list
 
   build:
+    desc: Build the `tgen` binary
     aliases: ["b"]
     cmds:
       - go build
 
   install:
+    desc: Build and copy the binary to `C:/SANDBOX/APP/bin`
     deps: ["build"]
     aliases: ["i"]
     cmds:
-      - 'if {{ eq OS "windows" }}; 
+      - 'if {{ eq OS "windows" }};
         then powershell cp tgen.exe C:/SANDBOX/APP/bin;
         else cp tgen.exe C:/SANDBOX/APP/bin; fi'
 
   test:
+    desc: Run tests in the `testing` package
     aliases: ["t"]
     cmds:
       - go test ./testing

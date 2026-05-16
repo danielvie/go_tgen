@@ -62,6 +62,15 @@ func GenFile(filename, templatePath string) error {
 	return t.Execute(file, nil)
 }
 
+func GenAgents() error {
+
+	if err := GenFile("./AGENTS.md", "templates/agents/AGENTS.md"); err != nil {
+		fmt.Println(err)
+	}
+
+	return nil
+}
+
 func GenPython() error {
 
 	err := GenWalkPath("templates/python")

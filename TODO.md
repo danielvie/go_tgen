@@ -1,0 +1,3 @@
+- [x] Review current Taskfile tasks
+- [x] Add `desc` to each Taskfile task
+- [x] Verify Taskfile contents reflect requested change
