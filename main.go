@@ -11,35 +11,33 @@ import (
 )
 
 func main() {
-	option := flag.String("option", "",
-		`
-add an $option to generate the files. 
-examples:
-		>> tgen agents 
-		     (template of AGENTS.md)
-        >> tgen python 
-             (template of python)
-        >> tgen cpp
-             (template of cpp)
-        >> tgen cppz
-             (template of cpp with zig build)
-        >> tgen cmake
-             (template of cmake)
-        >> tgen cpptask
-             (template of cpptask)
-        >> tgen go
-             (template of golang)
-        >> tgen react
-             (template of react app with vite)
-        >> tgen task
-             (template of Taskfile.yml)
-`)
+	flag.Usage = func() {
+		fmt.Fprintf(os.Stderr, "Usage: %s <option>\n\n", os.Args[0])
+		fmt.Fprintln(os.Stderr, "Available options:")
+		fmt.Fprintln(os.Stderr, "  agents   template for AGENTS.md")
+		fmt.Fprintln(os.Stderr, "  python   template for Python")
+		fmt.Fprintln(os.Stderr, "  py       alias for python")
+		fmt.Fprintln(os.Stderr, "  cpp      template for C++")
+		fmt.Fprintln(os.Stderr, "  cpplib   template for C++ library")
+		fmt.Fprintln(os.Stderr, "  cppz     template for C++ with Zig build")
+		fmt.Fprintln(os.Stderr, "  cmake    template for CMake")
+		fmt.Fprintln(os.Stderr, "  cpptask  template for C++ task setup")
+		fmt.Fprintln(os.Stderr, "  go       template for Go")
+		fmt.Fprintln(os.Stderr, "  react    template for React app with Vite")
+		fmt.Fprintln(os.Stderr, "  task     template for Taskfile.yml")
+		fmt.Fprintln(os.Stderr, "  static   template for Bun static server")
+	}
 
 	flag.Parse()
 
-	*option = os.Args[1]
+	if flag.NArg() == 0 {
+		flag.Usage()
+		os.Exit(1)
+	}
 
-	switch *option {
+	option := flag.Arg(0)
+
+	switch option {
 	case "agents":
 		gen.GenAgents()
 	case "python", "py":
