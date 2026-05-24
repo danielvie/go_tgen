@@ -4,9 +4,10 @@ tasks:
 
   default:
     cmds:
-      - task --list-all
+      - task --list
 
   run:
     aliases: ["r"]
+    desc: "Run the Application"
     cmds:
-      - uv run main.py
+      - uv run -m app.main
