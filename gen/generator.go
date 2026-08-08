@@ -81,6 +81,15 @@ func GenPython() error {
 	return nil
 }
 
+func GenC() error {
+	err := GenWalkPath("templates/c")
+	if err != nil {
+		return fmt.Errorf("error walking template: %v", err)
+	}
+
+	return nil
+}
+
 func GenCpp() error {
 	err := GenWalkPath("templates/cpp")
 	if err != nil {

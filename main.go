@@ -17,6 +17,7 @@ func main() {
 		fmt.Fprintln(os.Stderr, "  agents   template for AGENTS.md")
 		fmt.Fprintln(os.Stderr, "  python   template for Python")
 		fmt.Fprintln(os.Stderr, "  py       alias for python")
+		fmt.Fprintln(os.Stderr, "  c        template for C")
 		fmt.Fprintln(os.Stderr, "  cpp      template for C++")
 		fmt.Fprintln(os.Stderr, "  cpplib   template for C++ library")
 		fmt.Fprintln(os.Stderr, "  cppz     template for C++ with Zig build")
@@ -42,6 +43,8 @@ func main() {
 		gen.GenAgents()
 	case "python", "py":
 		gen.GenPython()
+	case "c":
+		gen.GenC()
 	case "cpp":
 		gen.GenCpp()
 	case "cpplib":
